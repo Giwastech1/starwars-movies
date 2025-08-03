@@ -8,12 +8,11 @@ import moviesReducer from '../features/movies/moviesSlice'
 import ProtectedRoute from '../components/ProtectedRoute'
 import Login from '../pages/Login'
 
-// ✅ Dummy component so we don’t rely on Movies fetching/rendering in this test
+// Dummy component so we don’t depend on Movies fetching during this test
 function DummyMovies() {
   return <h1>Star Wars Movies</h1>
 }
 
-// Simple store factory; loose typing keeps tests friction‑free
 const makeStore = (preloaded?: any) =>
   configureStore({
     reducer: { auth: authReducer, movies: moviesReducer } as any,
@@ -40,8 +39,8 @@ describe('Route protection', () => {
       </Provider>
     )
 
-    // Unauthed => should see the Login heading
-    expect(screen.getByRole('heading', { name: /login/i })).toBeInTheDocument()
+    // Our login page heading is "Sign in" now
+    expect(screen.getByRole('heading', { name: /sign in/i })).toBeInTheDocument()
   })
 
   it('redirects authenticated user away from /login to /movies', async () => {
@@ -63,7 +62,6 @@ describe('Route protection', () => {
       </Provider>
     )
 
-    // Auth’ed => should eventually see the Movies heading (redirect complete)
     const moviesHeading = await screen.findByRole('heading', { name: /star wars movies/i })
     expect(moviesHeading).toBeInTheDocument()
   })

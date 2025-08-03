@@ -10,7 +10,6 @@ import '../styles/movies.css'
 export default function Movies() {
   const dispatch = useDispatch<AppDispatch>()
 const { items, status, error } = useSelector((state: RootState) => state.movies)
-console.log('[Movies]', { status, itemsCount: items.length, error })
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchMovies())

@@ -26,9 +26,6 @@ export const fetchMovies = createAsyncThunk('movies/fetch', async () => {
 
     const data = await res.json();
 
-    console.log('[fetchMovies] raw:', data);
-
-  // Accept multiple shapes: array | {results: []} | {films: []} | {data: []} | object keyed by ids
   let arr: any[] = []
 
   if (Array.isArray(data)) {
@@ -39,7 +36,6 @@ export const fetchMovies = createAsyncThunk('movies/fetch', async () => {
     else if (Array.isArray(d.films)) arr = d.films
     else if (Array.isArray(d.data)) arr = d.data
     else {
-      // Fallback: sometimes it’s an object keyed by ids; take values that look like films
       const vals = Object.values(d as Record<string, unknown>)
       arr = vals.filter(
         (v: any) =>
@@ -57,8 +53,6 @@ export const fetchMovies = createAsyncThunk('movies/fetch', async () => {
     opening_crawl: m.opening_crawl ?? m.openingCrawl ?? '',
     episode_id: m.episode_id ?? (typeof m.id === 'number' ? m.id : undefined),
   }))
-
-  console.log('[fetchMovies] parsed count:', list.length)
   return list
 })
 
