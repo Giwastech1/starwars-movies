@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../app/store'
 import { logout } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
-import '../styles/navbar.css'
+import '../styles/navBar.css'
 
 export default function Navbar() {
   const user = useSelector((s: RootState) => s.auth.user)
