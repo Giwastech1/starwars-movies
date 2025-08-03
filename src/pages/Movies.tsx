@@ -19,7 +19,7 @@ console.log('[Movies]', { status, itemsCount: items.length, error })
 
     return (
         <main style={{ padding: 16 }}>
-            <h1>Star Wars Movies</h1>
+            <h1 style={{paddingLeft:"30px"}}>Star Wars Movies</h1>
             {status === 'loading' && <p role="status" aria-live="polite">Loading…</p>}
             {status === 'failed' && <p role="alert">Error: {error}</p>}
 

@@ -1,0 +1,72 @@
+:root {
+    --nav-bg: #0a0c10;   /* same as body */
+    --nav-border: #1c2330;
+    --nav-accent: #ffe81f; /* Star Wars gold */
+    --text: #f3f6f9;
+    --muted: #b5beca;
+  }
+  
+  /* Sticky top bar */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--nav-bg);
+    color: var(--text);
+    border-bottom: 1px solid var(--nav-border);
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  }
+  
+  /* Content row */
+  .navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Title with subtle gold underline */
+  .nav-title {
+    font-weight: 800;
+    letter-spacing: .2px;
+    position: relative;
+    padding-bottom:2px;
+  }
+  .nav-title::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -8px;
+    width: 56px; height: 3px;
+    background: var(--nav-accent);
+    border-radius: 2px;
+  }
+  
+  /* Right block */
+  .nav-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--muted);
+  }
+  
+  /* Logout consistent with card button */
+  .nav-logout {
+    padding: 6px 10px;
+    background: #1a2230;
+    color: var(--text);
+    border: 1px solid #2a3546;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-logout:hover {
+    background: #212c3e;
+    border-color: var(--nav-accent);
+  }
+  .nav-logout:focus-visible {
+    outline: 3px solid var(--nav-accent);
+    outline-offset: 3px;
+  }
+  

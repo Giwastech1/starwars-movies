@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../app/store'
 import { logout } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
+import '../styles/navbar.css'  // ← add
 
 export default function Navbar() {
   const user = useSelector((s: RootState) => s.auth.user)
@@ -14,22 +15,14 @@ export default function Navbar() {
   }
 
   return (
-    <nav style={{ padding: '12px 16px', borderBottom: '1px solid #ddd' }} aria-label="Main">
-      <strong>Star Wars Movies</strong>
-      <span style={{ float: 'right', display: 'flex', gap: 12, alignItems: 'center' }}>
-        {user ? (
-          <>
-            <span aria-live="polite" aria-atomic="true">
-              Logged in as <b>{user.username}</b>
-            </span>
-            <button onClick={onLogout} style={{ padding: '6px 10px' }}>
-              Logout
-            </button>
-          </>
-        ) : (
-          'Not logged in'
-        )}
-      </span>
+    <nav className="navbar" role="navigation" aria-label="Main">
+      <div className="navbar-inner">
+        <div className="nav-title">Star Wars Movies</div>
+        <div className="nav-right">
+          {user && <>Logged in as <b>{user.username}</b></>}
+          <button className="nav-logout" onClick={onLogout}>Logout</button>
+        </div>
+      </div>
     </nav>
   )
 }
