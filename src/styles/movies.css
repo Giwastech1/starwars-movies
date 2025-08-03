@@ -1,81 +1,121 @@
-.movies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .movie-card {
-    background: #141a23;
-    color: #fff;
-    border: 1px solid #2c3645;
-    padding: 1rem;
-    border-radius: 12px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  
-  .movie-card:hover,
-  .movie-card:focus {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-    border-color: #2f80ed;
-  }
-  
-  .movie-title {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.1rem;
-  }
-  
-  .movie-date {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
-  
-  .movie-crawl {
-    font-size: 0.9rem;
-    line-height: 1.3;
-  }
-  
-  .movie-more {
-    margin-top: auto;
-    padding: 0.5rem 0.75rem;
-    background: #1b2330;
-    color: #fff;
-    border: 1px solid #2c3645;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  /* Improve keyboard accessibility */
-.movie-card:focus-visible {
-  outline: 3px solid #2f80ed;
-  outline-offset: 3px;
+/* ===== STAR WARS THEME (dark + gold accent) ===== */
+:root {
+  --bg: #0a0c10;      /* deep space */
+  --card-bg: #12161b; /* uniform card background */
+  --text: #f3f6f9;    /* near-white */
+  --muted: #b5beca;   /* soft gray for meta */
+  --border: #1c2330;  /* subtle border */
+  --accent: #ffe81f;  /* Star Wars logo yellow */
+  --shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Optional: subtle starfield */
+body {
+  background:
+    radial-gradient(2px 2px at 20% 30%, #ffffff22 98%, transparent 100%) 0 0/ 100px 100px,
+    radial-gradient(1px 1px at 70% 60%, #ffffff18 98%, transparent 100%) 0 0/ 120px 120px,
+    var(--bg);
+}
+
+/* ===== Movies Grid ===== */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  padding: 1rem;
+}
+
+/* ===== Movie Card (uniform look) ===== */
+.movie-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  box-shadow: 0 1px 0 rgba(255,255,255,.035) inset;
+}
+
+.movie-card:hover,
+.movie-card:focus {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: #2b3750;
+}
+
+/* No per-card gradient—keep text readable without overlays */
+.movie-card::before { content: none; }
+
+/* ===== Text ===== */
+.movie-title {
+  margin: 0 0 .25rem 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: .1px;
+  position: relative;
+  padding-bottom: .25rem;
+}
+.movie-title::after {
+  content: "";
+  position: absolute; left: 0; bottom: -6px;
+  width: 40px; height: 3px;
+  
+  border-radius: 2px;
+}
+
+.movie-date {
+  margin: 0 0 .6rem 0;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.movie-crawl {
+  font-size: .95rem;
+  line-height: 1.45;
+  color: #e7ebf0;
+}
+
+/* ===== “More info” link styled like a button ===== */
+.movie-more {
+  display: inline-block;
+  margin-top: auto;
+  padding: .5rem .75rem;
+  background: #1a2230;
+  color: var(--text);
+  border: 1px solid #2a3546;
+  border-radius: 8px;
+  text-decoration: none;
+  line-height: 1;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.movie-more:hover {
+  background: #212c3e;
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* ===== Accessibility ===== */
+.movie-card:focus-visible,
 .movie-more:focus-visible {
-  outline: 3px solid #2f80ed;
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .movie-card {
-    transition: none;
-  }
-}
-.movie-card {
-  position: relative;
-  overflow: hidden;
+  .movie-card { transition: none; }
 }
 
-.movie-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+/* ===== Responsive ===== */
+@media (max-width: 680px) {
+  .movies-grid { grid-template-columns: 1fr; }
 }
-
-.movie-card > * {
-  position: relative;
-  z-index: 1;
+@media (min-width: 681px) and (max-width: 960px) {
+  .movies-grid { grid-template-columns: repeat(2, 1fr); }
 }

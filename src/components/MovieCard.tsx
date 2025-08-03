@@ -8,7 +8,7 @@ type Props = {
   background?: string // NEW
 }
 
-function MovieCardBase({ title, release_date, opening_crawl, background }: Props) {
+function MovieCardBase({ title, release_date, opening_crawl}: Props) {
   const readableDate = useMemo(() => formatDate(release_date), [release_date])
   const snippet = useMemo(() => truncate(opening_crawl, 120), [opening_crawl])
 
@@ -17,19 +17,21 @@ function MovieCardBase({ title, release_date, opening_crawl, background }: Props
       className="movie-card"
       tabIndex={0}
       aria-label={title}
-      style={background ? { background } : undefined} // NEW
+      
     >
       <h2 className="movie-title">{title}</h2>
       <p className="movie-date">Released: {readableDate}</p>
       <p className="movie-crawl">{snippet}</p>
-      <button
-        type="button"
+      <a
+        href="#"
+        role="button"
         className="movie-more"
         aria-label={`More info about ${title}`}
         onClick={(e) => e.preventDefault()}
       >
         More info
-      </button>
+      </a>
+
     </article>
   )
 }

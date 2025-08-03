@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { RootState, AppDispatch } from '../app/store'
 import { fetchMovies } from '../features/movies/moviesSlice'
 import MovieCard from '../components/MovieCard'
-import { episodeGradient } from '../utils/theme'
+
 
 import '../styles/movies.css'
 
@@ -31,7 +31,6 @@ console.log('[Movies]', { status, itemsCount: items.length, error })
                             title={movie.title}
                             release_date={movie.release_date}
                             opening_crawl={movie.opening_crawl}
-                            background={episodeGradient(movie.episode_id)}   
                         />
                     ))}
                 </section>
