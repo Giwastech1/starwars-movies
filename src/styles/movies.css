@@ -46,4 +46,36 @@
     border-radius: 8px;
     cursor: pointer;
   }
-  
+  /* Improve keyboard accessibility */
+.movie-card:focus-visible {
+  outline: 3px solid #2f80ed;
+  outline-offset: 3px;
+}
+
+.movie-more:focus-visible {
+  outline: 3px solid #2f80ed;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .movie-card {
+    transition: none;
+  }
+}
+.movie-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+}
+
+.movie-card > * {
+  position: relative;
+  z-index: 1;
+}
